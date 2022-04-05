@@ -22,6 +22,8 @@ const UserUpdatePage = () => {
       email: data[0].email,
       name: data[0].name,
       password: data[0].password,
+      phone: data[0].phone,
+      address: data[0].address,
     };
   }
   if (isLoading) return <h1>Loading...</h1>;

@@ -44,6 +44,8 @@ const UsersList = () => {
             id={user._id}
             name={user.name}
             email={user.email}
+            phone={user.phone}
+            address={user.address}
             deleteUser={deleteUser}
           />
         ))}
@@ -54,25 +56,30 @@ const UsersList = () => {
 
 export default UsersList;
 
-const UserTile = ({ id, name, email, deleteUser }) => {
+const UserTile = ({ id, name, email, phone, deleteUser, address }) => {
   const auth = useSelector((state) => state.auth);
-  console.log(auth);
+
   return (
     <div
       style={{
-        padding: "1rem 10rem",
+        padding: "1rem 5rem",
         display: "flex",
-        gap: "10rem",
       }}
+      className="grid-wrapper"
     >
       <span>{name}</span>
       <span style={{ color: "Grey" }}>{email}</span>
+
+      <span>{phone}</span>
+      <span>{address}</span>
       <span>
         <Link to={"/users/" + id + "/edit"}>Edit</Link>
       </span>
-      {auth.user._id != id && (
-        <Button onClick={() => deleteUser(id)}>Delete</Button>
-      )}
+      <span>
+        {auth.user._id != id && (
+          <Button onClick={() => deleteUser(id)}>Delete</Button>
+        )}
+      </span>
     </div>
   );
 };
