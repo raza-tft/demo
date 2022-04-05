@@ -18,6 +18,7 @@ const UserUpdatePage = () => {
 
   if (!isLoading) {
     user = {
+      id: data[0]._id,
       email: data[0].email,
       name: data[0].name,
       password: data[0].password,

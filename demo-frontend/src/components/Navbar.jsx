@@ -3,11 +3,8 @@ import { logout } from "../store";
 import Button from "./Button";
 
 const Navbar = () => {
-  const isAuthenticated = true;
-
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  console.log(auth);
 
   return (
     <div style={styles.nav}>
@@ -17,10 +14,10 @@ const Navbar = () => {
           marginRight: "2rem",
         }}
       >
-        {auth.user.email}
+        {auth?.user?.email}
       </span>
-      <Button onClick={() => dispatch(logout())}>
-        {isAuthenticated ? "Logout" : "Login"}
+      <Button onClick={() => (auth.isLoggedIn ? dispatch(logout()) : null)}>
+        {auth.isLoggedIn ? "Logout" : "Login"}
       </Button>
     </div>
   );

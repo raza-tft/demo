@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const mongoose = require("mongoose");
 
 const get = async (req, res) => {
   try {
@@ -61,8 +62,30 @@ const update = async (req, res) => {
   }
 };
 
+const remove = async (req, res) => {
+  try {
+    const deletedUser = await User.deleteOne({
+      _id: req.params.id,
+    });
+    // return res.send;
+    return res.json({
+      message: "User deleted successfully",
+      success: true,
+      data: { user: deletedUser },
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({
+      success: false,
+      message: "Couldn't delete the user",
+      error: error,
+    });
+  }
+};
+
 module.exports = {
   get,
   create,
   update,
+  remove,
 };

@@ -23,6 +23,7 @@ app.use(express.json());
 // routing
 app.post("/users/create", userController.create);
 app.put("/users/:id", userController.update);
+app.delete("/users/:id", userController.remove);
 app.get("/users/:id?", userController.get);
 
 app.post("/auth/login", authController.login);

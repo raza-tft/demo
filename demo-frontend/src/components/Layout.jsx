@@ -5,9 +5,9 @@ import { Navigate, Outlet } from "react-router-dom";
 const Layout = ({ children }) => {
   const auth = useSelector((state) => state.auth);
 
-  if (!auth?.isLoggedIn) {
-    return <Navigate to="/login" />;
-  }
+  // if (!auth?.isLoggedIn) {
+  //   return <Navigate to="/login" />;
+  // }
 
   return (
     <>

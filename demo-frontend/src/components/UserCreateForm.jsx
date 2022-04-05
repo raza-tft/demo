@@ -1,6 +1,5 @@
 import { Formik } from "formik";
 import { useMutation, useQueryClient } from "react-query";
-import { useDispatch } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import * as Yup from "yup";
 import { request } from "../utils/requests";
@@ -19,12 +18,16 @@ const UserCreateForm = ({ submitUrl, method, data }) => {
         /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
         "Password must contain at least 8 characters, one uppercase, one number and one special case character"
       ),
+    phone: Yup.string().matches(
+      /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/,
+      "Invalid number"
+    ),
   });
 
   const queryClient = useQueryClient();
 
   const { mutate, isSuccess, isError } = useMutation(
-    "login",
+    method == "POST" ? "userCreate" : ["userUpdate", data.id],
     (data) =>
       request({
         url: submitUrl,
@@ -95,7 +98,18 @@ const UserCreateForm = ({ submitUrl, method, data }) => {
                 placeholder="password"
                 type="password"
               />
-
+              <Input
+                name="phone"
+                label="Phone No."
+                placeholder="999999XXXX"
+                type="text"
+              />
+              <Input
+                name="address"
+                label="Address"
+                placeholder="Address"
+                type="text"
+              />
               <Button type="submit" disabled={isSubmitting}>
                 {method == "POST" ? "Add User" : "Update User"}
               </Button>
