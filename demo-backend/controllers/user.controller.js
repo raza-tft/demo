@@ -41,13 +41,11 @@ const create = async (req, res) => {
 };
 
 const update = async (req, res) => {
-  const { name } = req.body;
+  const body = req.body;
   try {
-    const user = await User.findByIdAndUpdate(
-      req.params.id,
-      { name: name },
-      { new: true }
-    );
+    const user = await User.findByIdAndUpdate(req.params.id, body, {
+      new: true,
+    });
     return res.json({
       message: "User updated successfully",
       success: true,
