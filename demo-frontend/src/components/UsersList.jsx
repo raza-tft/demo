@@ -79,7 +79,9 @@ const UserTile = ({ id, name, email, phone, deleteUser, address }) => {
       </span>
       <span>
         {auth.user._id != id && (
-          <Button onClick={() => deleteUser(id)}>Delete</Button>
+          <Button onClick={() => deleteUser(id)} className="danger">
+            Delete
+          </Button>
         )}
       </span>
     </div>

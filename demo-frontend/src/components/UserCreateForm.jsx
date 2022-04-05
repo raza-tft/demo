@@ -18,10 +18,9 @@ const UserCreateForm = ({ submitUrl, method, data }) => {
         /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
         "Password must contain at least 8 characters, one uppercase, one number and one special case character"
       ),
-    phone: Yup.string().matches(
-      /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/,
-      "Invalid number"
-    ),
+    phone: Yup.string()
+      .required("Phone number is required")
+      .matches(/^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/, "Invalid number"),
   });
 
   const queryClient = useQueryClient();
@@ -69,12 +68,16 @@ const UserCreateForm = ({ submitUrl, method, data }) => {
             User Already exist with this email
           </div>
         )}
-        <Button type="button">
-          <Link to="/">Go Back</Link>
-        </Button>
+        {/* <Button type="button"> */}
+        <Link to="/">Go Back</Link>
+        {/* </Button> */}
         <h1>Add a new User</h1>
         <Formik
-          initialValues={data ? data : { name: "", email: "", password: "" }}
+          initialValues={
+            data
+              ? data
+              : { name: "", email: "", password: "", phone: "", address: "" }
+          }
           validationSchema={validationSchema}
           onSubmit={onSubmit}
         >
