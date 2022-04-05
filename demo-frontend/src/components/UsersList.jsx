@@ -14,15 +14,17 @@ const UsersList = () => {
   const queryClient = useQueryClient();
 
   const deleteUser = async (userId) => {
-    try {
-      const response = await request({
-        url: `/users/${userId}`,
-        method: "DELETE",
-      });
-      queryClient.invalidateQueries("usersList");
-      console.log(response);
-    } catch (error) {
-      console.log(error);
+    if (window.confirm("Are you sure you want to delete the user ?")) {
+      try {
+        const response = await request({
+          url: `/users/${userId}`,
+          method: "DELETE",
+        });
+        queryClient.invalidateQueries("usersList");
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
