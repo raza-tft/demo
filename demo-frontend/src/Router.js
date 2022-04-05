@@ -7,6 +7,7 @@ import UserCreatePage from "./pages/UserCreate.page";
 import UserUpdatePage from "./pages/UserUpdate.page";
 
 const Router = () => {
+  // console.log("Router Mounted");
   return (
     <BrowserRouter>
       <Routes>

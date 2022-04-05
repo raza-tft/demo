@@ -26,7 +26,7 @@ const UserCreateForm = ({ submitUrl, method, data }) => {
   const queryClient = useQueryClient();
 
   const { mutate, isSuccess, isError } = useMutation(
-    method == "POST" ? "userCreate" : ["userUpdate", data.id],
+    // method == "POST" ? "userCreate" : ["userUpdate", data.id],
     (data) =>
       request({
         url: submitUrl,
